@@ -9,6 +9,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import *
 from statsd import StatsClient
 from logging.config import dictConfig
+from logging.handlers import SysLogHandler
 
 dictConfig({
     'version': 1,
@@ -19,13 +20,19 @@ dictConfig({
         'class': 'logging.StreamHandler',
         'stream': 'ext://flask.logging.wsgi_errors_stream',
         'formatter': 'default'
-    }},
+    },
+    'sys-log': {
+        'class': 'logging.handlers.SysLogHandler',
+        'address': '/dev/log',
+        'formatter': 'default'
+    }
+    },
     'root': {
-        'level': 'INFO',
-        'handlers': ['wsgi']
+        'level': 'DEBUG',
+        'handlers': ['wsgi'],
+        'propagate': True,
     }
 })
-
 
 import json
 
