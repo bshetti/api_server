@@ -20,13 +20,7 @@ dictConfig({
         'class': 'logging.StreamHandler',
         'stream': 'ext://flask.logging.wsgi_errors_stream',
         'formatter': 'default'
-    },
-    'sys-log': {
-        'class': 'logging.handlers.SysLogHandler',
-        'address': '/dev/log',
-        'formatter': 'default'
-    }
-    },
+    }},
     'root': {
         'level': 'DEBUG',
         'handlers': ['wsgi'],
